@@ -15,3 +15,4 @@ with open('categories.txt', 'r', encoding='UTF-8') as f:
                 else:
                     r.write(link.strip() + f'?page={i+1}' + '\n')
                     print(link.strip() + f'?page={i+1}')
+
