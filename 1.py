@@ -1,5 +1,6 @@
 import json
 import re
+from datetime import datetime
 
 from bs4 import BeautifulSoup
 
@@ -13,4 +14,16 @@ if script:
     obj = pattern.search(script.text).group(1)
     obj = json.loads(obj)
     # print(obj)
-    print(obj['product']['imageUrl'])
+    for i in obj['listing']['items']:
+        name = i['variant']
+        brand = i['manufacturer']
+        category = i['lowestCategory']
+        price_old = i['unitSalePrice']
+        price = i['unitPrice']
+        price_unit = 'шт.'
+        available = 'Y' if i['stock'] > 0 else 'N'
+        added = datetime.today().strftime('%Y-%m-%d')
+        updated = added
+        url = i['url']
+        image_url = i['imageUrl']
+        print(f'{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;')
