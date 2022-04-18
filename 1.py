@@ -15,6 +15,7 @@ if script:
     obj = json.loads(obj)
     # print(obj)
     for i in obj['listing']['items']:
+        sku = i['skuCode']
         name = i['variant']
         brand = i['manufacturer']
         category = i['lowestCategory']
@@ -26,4 +27,4 @@ if script:
         updated = added
         url = i['url']
         image_url = i['imageUrl']
-        print(f'{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;')
+        print(f'{sku};;{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;')
