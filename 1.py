@@ -12,6 +12,7 @@ script = soup.find("script", text=pattern)
 
 if script:
     obj = pattern.search(script.text).group(1)
+    print(obj)
     obj = json.loads(obj)
     # print(obj)
     for i in obj['listing']['items']:

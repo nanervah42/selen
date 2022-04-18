@@ -1,11 +1,12 @@
 # 0. основной транспорт
 
-from selenium import webdriver
-from selenium_stealth import stealth
-from bs4 import BeautifulSoup
 import time
 
-def list_parser(url):
+from selenium import webdriver
+from selenium_stealth import stealth
+
+
+def transport(url):
 
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
