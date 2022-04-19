@@ -28,12 +28,3 @@ def transport(url):
     data = driver.page_source
     driver.quit()
     return data
-
-
-# def list_links(data):
-#
-#     soup = BeautifulSoup(data, 'lxml')
-#     quotes = soup.find_all('div', class_='product-container__standard')
-#     for i in quotes:
-#         lnk = 'https://street-beat.ru' + i.find('a', class_='product-card__figure product-card__product').get('href')
-#         print(lnk)

@@ -23,23 +23,30 @@ with open('categories_full.txt', 'r', encoding='UTF-8') as f:
                     obj = pattern.search(script.text).group(1)
                     obj = json.loads(obj)
                     for i in obj['listing']['items']:
-                        sku = i['skuCode']
-                        name = i['variant']
-                        brand = i['manufacturer']
-                        category = i['lowestCategory']
-                        price_old = i['unitPrice']
-                        price = i['unitSalePrice']
-                        price_unit = 'шт.'
-                        available = 'Y' if i['stock'] > 0 else 'N'
-                        added = datetime.today().strftime('%Y-%m-%d')
-                        updated = added
-                        url = i['url']
-                        image_url = i['imageUrl']
-                        print(
-                            f'{sku};;{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;')
-                        if available == 'Y':
-                            w.write(
-                                f'{sku};;{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;' + '\n')
+                        try:
+                            sku = i['skuCode']
+                            name = i['variant']
+                            brand = i['manufacturer']
+                            category = i['lowestCategory']
+                            price_old = i['unitPrice']
+                            price = i['unitSalePrice']
+                            price_unit = 'шт.'
+                            available = 'Y' if i['stock'] > 0 else 'N'
+                            added = datetime.today().strftime('%Y-%m-%d')
+                            updated = added
+                            url = i['url']
+                            image_url = i['imageUrl']
+                            print(
+                                f'{sku};;{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;')
+                            if available == 'Y':
+                                w.write(
+                                    f'{sku};;{name};{brand};{category};{price_old};{price};{price_unit};{available};{added};{updated};{url};{image_url};;' + '\n')
+                        except:
+                            with open('result_error.txt', 'a+', encoding='UTF-8') as err:
+                                err.write(f'Ошибка товара: {i}\n')
+                            print(f'Ошибка товара: {i}')
                 print(page)
             except:
-                print('error?')
+                with open('result_error.txt', 'a+', encoding='UTF-8') as err:
+                    err.write(f'Ошибка страницы: {page}\n')
+                print(f'Ошибка страницы: {page}')
